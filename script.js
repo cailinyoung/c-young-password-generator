@@ -1,82 +1,47 @@
-var enter;
-var confirmNumber;
-var confirmCharacter;
-var confirmUppercase;
-var confirmLowercase;
-
-character = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"];
-number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
-var choices;
-var toUpper = function (x) {
-  return x.toUpperCase();
-}
-alpha2 = alpha.map(toUpper);
+// Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-generateBtn.addEventListener("click", function () {
-  var password = generatePassword();
-  document.getElementById("password").placeholder = password;
-});
-
 // Write password to the #password input
-function generatePassword() {
-  enter = parseInt(prompt('How many characters would you like your password to contain?'));
+function writePassword() {
+  // var password = generatePassword();
+  var passwordText = document.querySelector("#password");
 
-  if (!enter) {
-    alert('This needs a value');
-  } else {
-    confirmCharacter = confirm('Click OK to confirm including special characters.');
-    confirmNumber = confirm('Click OK to confirm including numeric characters.');
-    confirmLowercase = confirm('Click OK to confirm including lowercase characters.');
-    confirmUppercase = confirm('Click OK to confirm including uppercase characters.');
-  };
+  passwordText.value = password;
+  
+// ask user for password length 8-128 characters 
+var characterLength = Number(prompt("How many characters would you like your password to be?"));
+console.log(characterLength);
+  while(isNaN(characterLength) || characterLength<8 || characterLength>128) characterLength = Number(prompt("How many characters would you like your password to be?"));
 
-  if (!confirmCharacter && !confirmNumber && !confirmLowercase && !confirmUppercase) {
-    choices = alert('You must choose a criteria!');
-  } else if (confirmCharacter && confirmNumber && confirmLowercase && confirmUppercase) {
-    choices = character.concat(number, alpha, alpha2);
-  } else if (confirmCharacter && confirmNumber && confirmUppercase) {
-    choices = character.concat(number, alpha2);
-  } else if (confirmCharacter && confirmNumber && confirmLowercase) {
-    choices = character.concat(number, alpha);
-  } else if (confirmCharacter && confirmLowercase && confirmUppercase) {
-    choices = character.concat(alpha, alpha2);
-  } else if (confirmNumber && confirmLowercase && confirmUppercase) {
-    choices = number.concat(alpha, alpha2);
-  } else if (confirmCharacter && confirmNumber) {
-    choices = character.concat(number);
-  } else if (confirmCharacter && confirmLowercase) {
-    choices = character.concat(alpha);
-  } else if (confirmCharacter && confirmUppercase) {
-    choices = character.concat(alpha2);
-  } else if (confirmLowercase && confirmNumber) {
-    choices = alpha.concat(number);
-  } else if (confirmLowercase && confirmUppercase) {
-    choices = alpha.concat(alpha2);
-  } else if (confirmNumber && confirmUppercase) {
-    choices = number.concat(alpha2);
-  } else if (confirmCharacter) {
-    choices = character;
-  } else if (confirmNumber) {
-    choices = number;
-  } else if (confirmLowercase) {
-    choices = alpha;
-  };
+// ask user about lowercase character preference
+var charLower = confirm("Would you like your password to contain lowercase letters?");
+console.log(charLower);
 
-  var password = [];
+// ask user about uppercase characteter preference 
+var charUpper = confirm("Would you like your password to contain uppercase letters?");
+console.log(charUpper);
 
-  for (var i = 0; i < enter; i++) {
-    var pickChoices = choices[Math.floor(Math.random() * choices.length)];
-    password.push(pickChoices);
-  }
+// ask user about number preference 
+var charNumber = confirm("Would you like your password to contain numbers?");
+console.log(charNumber);
 
-  var password = password.join("");
-  UserInput(password);
-  return password;
+// ask user about special character preference 
+var charSpecial = confirm("Would you like your password to contain special letters?");
+console.log(charSpecial);
+
+// confirming at least 1 character type 
+while(!charLower&& !charUpper&& !charNumber&& !charSpecial){
+  alert("You must have at least one character type");
+   charLower = confirm("Would you like your password to contain lowercase letters?");
+   charUpper = confirm("Would you like your password to contain uppercase letters?");
+   charNumber = confirm("Would you like your password to contain numbers?");
+   charSpecial = confirm("Would you like your password to contain special letters?");
+}
+// random generator
+// make an array, if yes.. 4 arrays = specifications, 5th array = empty pool. 
+
+
 }
 
-function UserInput(ps) {
-  document.getElementById("password").textContent = ps;
-}
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
