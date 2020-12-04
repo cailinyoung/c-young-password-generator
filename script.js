@@ -1,47 +1,55 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
+// Assignment Code:
+finalResult = "";
 
 // Write password to the #password input
+function generatePassword() {
+  var passwordLength = prompt("Password must be bewteen 8 and 128 characters. " + "Please input how many characters you would like!");
+  if (passwordLength < 8 || passwordLength > 128) {
+    alert("Number must be between 8 and 128");
+    generatePassword()
+  } else {
+    var askSymbols = confirm("Click OK to confirm special characters");
+    var askNumbers = confirm("Click OK to add numbers");
+    var askUpperCase = confirm("Click OK to add uppercase characters");
+
+    writePassword();
+  }
+
 function writePassword() {
-  // var password = generatePassword();
+  var symbols = "!@#$%^&*_+~`|\:;?><,./-="
+  var numbers = "1234567890"
+  var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  var lowerCase = "abcdefghijklmnopqrstuvwxyz"
+  var totalChar = lowerCase
+
+  if (askSymbols === true) {
+    totalChar = totalChar + symbols
+  } if (askNumbers === true) {
+      totalChar = totalChar + numbers
+  } if (askUpperCase === true) {
+      totalChar = totalChar + upperCase
+  }
+  console.log(totalChar);
+  for (var i = passwordLength; i > 0; i--) {
+    finalResult = finalResult + totalChar[Math.floor(Math.random() * totalChar.length - 1)]
+  }
+  console.log(finalResult);
+  // var password = writePassword();
+
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
-  
-// ask user for password length 8-128 characters 
-var characterLength = Number(prompt("How many characters would you like your password to be?"));
-console.log(characterLength);
-  while(isNaN(characterLength) || characterLength<8 || characterLength>128) characterLength = Number(prompt("How many characters would you like your password to be?"));
+  passwordText.value = finalResult;
+  }
 
-// ask user about lowercase character preference
-var charLower = confirm("Would you like your password to contain lowercase letters?");
-console.log(charLower);
-
-// ask user about uppercase characteter preference 
-var charUpper = confirm("Would you like your password to contain uppercase letters?");
-console.log(charUpper);
-
-// ask user about number preference 
-var charNumber = confirm("Would you like your password to contain numbers?");
-console.log(charNumber);
-
-// ask user about special character preference 
-var charSpecial = confirm("Would you like your password to contain special letters?");
-console.log(charSpecial);
-
-// confirming at least 1 character type 
-while(!charLower&& !charUpper&& !charNumber&& !charSpecial){
-  alert("You must have at least one character type");
-   charLower = confirm("Would you like your password to contain lowercase letters?");
-   charUpper = confirm("Would you like your password to contain uppercase letters?");
-   charNumber = confirm("Would you like your password to contain numbers?");
-   charSpecial = confirm("Would you like your password to contain special letters?");
-}
-// random generator
-// make an array, if yes.. 4 arrays = specifications, 5th array = empty pool. 
-
-
+  // function generatePassword() {
+  //   return 
+  // }
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+// button semantics
+var generateBtn = document.querySelector("#generate");
+
+generateBtn.addEventListener("click", function () {
+  var password = generatePassword();
+  document.getElementById("password").placeholder = "password";
+});
