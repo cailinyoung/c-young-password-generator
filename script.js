@@ -1,4 +1,5 @@
 // Assignment Code:
+var generateBtn = document.querySelector("#generate");
 finalResult = "";
 
 // Write password to the #password input
@@ -16,7 +17,7 @@ function generatePassword() {
   }
 
 function writePassword() {
-  var symbols = "!@#$%^&*_+~`|\:;?><,./-="
+  var symbols = "!@#$%^&*_+~`|;?><,./-="
   var numbers = "1234567890"
   var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   var lowerCase = "abcdefghijklmnopqrstuvwxyz"
@@ -41,15 +42,15 @@ function writePassword() {
   passwordText.value = finalResult;
   }
 
-  // function generatePassword() {
-  //   return 
-  // }
+  function generatePassword() {
+    return 
+  }
 }
 
 // button semantics
-var generateBtn = document.querySelector("#generate");
-
 generateBtn.addEventListener("click", function () {
   var password = generatePassword();
-  document.getElementById("password").placeholder = "password";
+  finalResult = document.getElementById('generate').value = "";
+  finalResult.text = password;
 });
+

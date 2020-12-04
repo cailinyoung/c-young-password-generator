@@ -1,0 +1,13 @@
+// // button semantics
+// var generateBtn = document.querySelector("#generate");
+
+// generateBtn.addEventListener("click", function () {
+//   var password = generatePassword();
+//   document.getElementById('generate').value = "";
+// });
+
+function writePassword(){
+  password = generatePassword()
+  finalResult = document.querySelector("#password");ox
+  final.text = password
+}
